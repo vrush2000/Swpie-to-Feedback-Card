@@ -1,5 +1,7 @@
 {
+  "defaultTitle": "",
+  "transparentTitle": "always",
   "usingComponents": {
-    "swipe-to-feedback-card": "plugin://myPlugin/swipe-to-feedback-card"
+    "icon": "antd-mini/es/Icon/index"
   }
 }

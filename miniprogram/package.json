@@ -1,0 +1,14 @@
+{
+  "name": "miniprogram",
+  "version": "1.0.0",
+  "description": "A component of tinder-like card swiper to feedback user's preference for Alipay Mini Program development.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "antd-mini": "^2.11.0"
+  }
+}

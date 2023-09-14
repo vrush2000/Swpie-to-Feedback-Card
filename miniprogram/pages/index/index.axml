@@ -1,0 +1,94 @@
+<view class="custom-nav" style="height:{{titleBarHeight + statusBarHeight}}px">
+  <view class="custom-titleBar" style="height:{{titleBarHeight}}px;padding-top:{{statusBarHeight}}px;">
+    Card Swipe
+  </view>
+</view>
+
+<movable-area class="card-container">
+
+  <view a:if="{{ !list.length }}">
+    <view class="card-empty" onTap="reload">
+      <view class="empty-state">
+        <icon type="InformationCircleOutline" style="font-size: 70px;color:rgb(255,255,255)" />
+        <view class="empty-state">Tap to reload</view>
+      </view>
+    </view>
+  </view>
+
+  <movable-view
+    a:for="{{list}}"
+    a:for-index="index"
+    direction="none"
+    class="card  {{(list[currentItemIndex].id+1==item.id+1)?(currentHideClass):''}}  {{ isDelete && list[currentItemIndex].id===item.id? 'rotate-out-2-bl-ccw'  : ''}}  {{ isFit && list[currentItemIndex].id===(item.id)? 'rotate-2-bl-ccw' : ''}}"
+    onTouchMove="onSwiperChange"
+    onTouchEnd='onEndSwipe'
+    onTouchStart="onTouchStart"
+    data-item="{{item}}"
+    x="{{(list[currentItemIndex].id+1===item.id+1)?35:(list[currentItemIndex].id+1===item.id)?45:55}}"
+    y="{{(list[currentItemIndex].id+1===item.id+1)?0:(list[currentItemIndex].id+1===item.id)?10:20}}"
+    a:key="*this"
+    disabled="true"
+    style=" z-index: {{9999-index}}; {{(list[currentItemIndex].id+1===item.id+1)? 'width:80%;' :(list[currentItemIndex].id+1===item.id)? 'width:75%;': 'width:70%;' }}"
+  >
+    <view
+      class="animation-element shadow"
+      style="
+      {{position}}
+      transform: rotate({{(list[currentItemIndex].id==item.id)?(rotate):''}}deg);"
+      animation="{{(list[currentItemIndex].id+1==item.id+1)?(animation):''}} "
+    >
+
+      <view class="">
+        <image class="card-main-image" mode="aspectFill" src="{{item.url}}" />
+        <view>
+          <view a:if="{{list[currentItemIndex].id==item.id}}">
+            <view class='card-option'>
+              <icon type="success" size="70" color="rgb(255,255,255)" a:if="{{currentCardOption == 1}}" />
+              <icon type="clear" size="70" color="rgb(255,255,255)" a:elif="{{currentCardOption == -1}}" />
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view>
+        <view class='card-title-container'>
+          <view>
+          <view class='margin card-option-container '>
+            <view>
+              <text class="card-title">{{item.title}}</text>
+              <text class="card-subtitle">{{item.subtitle}}</text>
+                <text class="card-description">{{item.description}}</text>
+            </view>
+          </view>
+          </view>
+        </view>
+      </view>
+
+      <view a:if="{{list[currentItemIndex].id==item.id}}" class="card-option-container {{currentCardOption === 1 || currentCardOption == -1 ? '': 'hidden'}}">
+        <view class="card-option {{currentCardOption === 1 ? 'like': 'dislike'}} ">
+          <icon a:if="{{currentCardOption == 1}}" type="CheckOutline" style="font-size: 30px" />
+          <icon
+            a:elif="{{currentCardOption == -1}}"
+            type="CloseOutline"
+            style="font-size: 30px"
+          />
+        </view>
+      </view>
+    </view>
+  </movable-view>
+
+  <view a:if="{{ list.length }}" class="tinder--buttons">
+    <view class="button-container">
+      <button class="{{ currentCardOption === -1 ? 'dislike' : 'gray' }}" onTap="handleSwipeLeft">
+        <icon type="CloseOutline" style="font-size: 30px" />
+      </button>
+      <view class="button-label">Dislike</view>
+    </view>
+    <view class="button-container">
+      <button class="{{ currentCardOption === 1 ? 'like' : 'gray' }}" onTap="handleSwipeRight">
+        <icon type="CheckOutline" style="font-size: 30px" />
+      </button>
+      <view class="button-label">Like</view>
+    </view>
+  </view>
+</movable-area>
