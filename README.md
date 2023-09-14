@@ -17,7 +17,7 @@ Social recommendation options like Tinder, Tantan, and Aloha interact with each 
 
 
 ## Demo
-<video src="./assets//card-swipe.mp4" height="647" width="366"  autoplay loop muted>
+<video src="./assets/card-swipe.mp4" height="647" width="366"  autoplay loop muted>
 </video>
 <img src="./assets/card-left.jpeg" height=" 647" width="366">
 <img src="./assets/card-right.jpeg" height="647" width="366">
